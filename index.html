@@ -1,0 +1,96 @@
+
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>PageTurn — Book Tracker</title>
+  <link rel="stylesheet" href="style.css">
+</head>
+<body>
+  <header class="topbar">
+    <a class="brand" href="#"><span class="brand-icon">✦</span> PageTurn</a>
+    <span class="top-note">Your personal reading space</span>
+  </header>
+
+  <main class="shell">
+    <section class="hero">
+      <div>
+        <p class="eyebrow">YOUR READING, IN ONE PLACE</p>
+        <h1>Make time for <span>great stories.</span></h1>
+        <p class="hero-copy">Keep track of what you're reading, what you've finished, and what's next.</p>
+      </div>
+      <div class="hero-art">📚<i>✦</i></div>
+    </section>
+
+    <section class="stats">
+      <article class="stat-card">
+        <span class="stat-icon purple">▤</span>
+        <div><p>Total books</p><strong id="totalCount">0</strong></div>
+      </article>
+      <article class="stat-card">
+        <span class="stat-icon orange">◷</span>
+        <div><p>Currently reading</p><strong id="readingCount">0</strong></div>
+      </article>
+      <article class="stat-card">
+        <span class="stat-icon green">✓</span>
+        <div><p>Finished</p><strong id="finishedCount">0</strong></div>
+      </article>
+    </section>
+
+    <section class="content-grid">
+      <section class="panel">
+        <p class="eyebrow">GROW YOUR LIBRARY</p>
+        <h2>Add a book</h2>
+
+        <form id="bookForm" novalidate>
+          <label for="title">Book title</label>
+          <input id="title" name="title" placeholder="e.g. Aadujeevitham" maxlength="160">
+          <p id="titleError" class="field-error"></p>
+
+          <label for="author">Author</label>
+          <input id="author" name="author" placeholder="e.g. Benyamin" maxlength="100">
+          <p id="authorError" class="field-error"></p>
+
+          <label for="status">Reading status</label>
+          <select id="status" name="status">
+            <option value="To read">To read</option>
+            <option value="Reading">Reading</option>
+            <option value="Finished">Finished</option>
+          </select>
+
+          <button class="primary-btn" type="submit">+ Add to my library</button>
+        </form>
+      </section>
+
+      <section class="library-area">
+        <div class="library-heading">
+          <h2>My library <span id="libraryCount" class="count-pill">0</span></h2>
+          <button id="clearSearch" class="text-btn" type="button">Clear filters</button>
+        </div>
+
+        <div class="toolbar">
+          <input id="search" type="search" placeholder="Search title or author..." aria-label="Search title or author">
+          <select id="filter" aria-label="Filter books">
+            <option value="All">All books</option>
+            <option value="To read">To read</option>
+            <option value="Reading">Reading</option>
+            <option value="Finished">Finished</option>
+          </select>
+        </div>
+
+        <div id="bookList" class="book-list"></div>
+        <div id="emptyState" class="empty-state">
+          <span>📚</span>
+          <h3>Your shelf is waiting</h3>
+          <p>Add your first book to start your reading journey.</p>
+        </div>
+      </section>
+    </section>
+
+    <footer>PageTurn Book Tracker ✦ Made for curious minds</footer>
+  </main>
+
+  <script src="script.js"></script>
+</body>
+</html>
