@@ -4,65 +4,128 @@
 <head>
   <meta charset="UTF-8">
   <meta name="viewport" content="width=device-width, initial-scale=1.0">
-  <meta name="theme-color" content="#5146e5">
+  <meta name="theme-color" content="#2f7bff">
   <title>PageTurn | Book Tracker</title>
   <link rel="stylesheet" href="style.css">
   <script src="script.js" defer></script>
 </head>
 <body>
   <header class="topbar">
-    <a href="#" class="brand"><span class="logo">P</span> PageTurn</a>
-    <span class="tagline">Your personal reading space</span>
+    <a class="brand" href="#">📚 PageTurn</a>
+    <button id="themeToggle" class="theme-btn" type="button"
+            aria-pressed="false">🌙 Dark mode</button>
   </header>
 
   <main class="container">
     <section class="hero">
-      <div>
-        <p class="eyebrow">YOUR READING JOURNEY</p>
-        <h1>Every page takes<br>you <span>somewhere.</span></h1>
-        <p class="hero-text">
-          Organize your books, celebrate your progress,
-          and discover your next favorite story.
-        </p>
+      <p class="eyebrow">YOUR PERSONAL LIBRARY</p>
+      <h1>Every book has a story.<br><span>Track yours.</span></h1>
+      <p>Organize your reading, set goals, and discover connections between your books.</p>
+    </section>
+
+    <section class="stats" aria-label="Reading statistics">
+      <article class="stat-card">
+        <span>Total books</span><strong id="totalCount">0</strong>
+      </article>
+      <article class="stat-card">
+        <span>To read</span><strong id="toReadCount">0</strong>
+      </article>
+      <article class="stat-card">
+        <span>Reading</span><strong id="readingCount">0</strong>
+      </article>
+      <article class="stat-card">
+        <span>Finished</span><strong id="finishedCount">0</strong>
+      </article>
+    </section>
+
+    <section class="panel goal-panel">
+      <div class="goal-heading">
+        <div>
+          <p class="eyebrow">MONTHLY CHALLENGE</p>
+          <h2>My reading goal 🎯</h2>
+          <p id="goalText" class="muted">0 of 5 books finished this month</p>
+        </div>
+        <label class="goal-input">
+          Monthly target
+          <input id="goalInput" type="number" min="1" max="100" value="5">
+        </label>
       </div>
-      <div class="hero-art" aria-hidden="true">📚</div>
+      <div id="goalProgress" class="progress-track" role="progressbar"
+           aria-label="Monthly reading progress"
+           aria-valuemin="0" aria-valuemax="100" aria-valuenow="0">
+        <div id="goalBar" class="progress-fill"></div>
+      </div>
     </section>
 
-    <section class="stats" aria-label="Book statistics">
-      <article class="stat-card">
-        <span class="stat-icon purple">▤</span>
-        <div><p>Total books</p><strong id="totalCount">0</strong></div>
-      </article>
-      <article class="stat-card">
-        <span class="stat-icon orange">◷</span>
-        <div><p>To read</p><strong id="toReadCount">0</strong></div>
-      </article>
-      <article class="stat-card">
-        <span class="stat-icon blue">◉</span>
-        <div><p>Reading</p><strong id="readingCount">0</strong></div>
-      </article>
-      <article class="stat-card">
-        <span class="stat-icon green">✓</span>
-        <div><p>Finished</p><strong id="finishedCount">0</strong></div>
-      </article>
+    <section class="panel constellation-panel">
+      <div class="constellation-heading">
+        <div>
+          <p class="eyebrow">YOUR READING UNIVERSE</p>
+          <h2>Reading Constellation ✨</h2>
+          <p class="muted">Every book is a star. Explore connections between your reads.</p>
+        </div>
+        <span class="constellation-key">✦ Each star is a book</span>
+      </div>
+
+      <div class="constellation-legend">
+        <span><i class="legend-dot genre-dot"></i> Same genre</span>
+        <span><i class="legend-dot theme-dot"></i> Shared theme</span>
+      </div>
+
+      <div id="constellationEmpty" class="constellation-empty">
+        Add books to create your reading universe.
+      </div>
+
+      <div class="constellation-canvas">
+        <svg id="constellationMap" viewBox="0 0 720 420"
+             role="group" aria-label="Interactive map of books"></svg>
+      </div>
+
+      <div id="constellationDetail" class="constellation-detail" aria-live="polite">
+        <strong>Select a star</strong>
+        <p>Choose a book in your constellation to explore it.</p>
+      </div>
     </section>
 
-    <section class="workspace">
+    <div class="workspace">
       <section class="panel add-panel">
         <p class="eyebrow">GROW YOUR LIBRARY</p>
         <h2>Add a book</h2>
-        <p class="subtext">Every great reading journey starts somewhere.</p>
+        <p class="muted">Keep your next great read close.</p>
 
-        <form id="bookForm" novalidate>
-          <label for="title">Book title <span>*</span></label>
-          <input id="title" name="title" maxlength="160"
-                 placeholder="e.g. Aadujeevitham" autocomplete="off">
-          <p class="error" id="titleError" role="alert"></p>
+        <form id="bookForm">
+          <label for="title">Book title *</label>
+          <input id="title" name="title" type="text"
+                 placeholder="e.g. Atomic Habits" maxlength="150" required>
 
-          <label for="author">Author <span>*</span></label>
-          <input id="author" name="author" maxlength="100"
-                 placeholder="e.g. Benyamin" autocomplete="off">
-          <p class="error" id="authorError" role="alert"></p>
+          <label for="author">Author *</label>
+          <input id="author" name="author" type="text"
+                 placeholder="e.g. James Clear" maxlength="100" required>
+
+          <label for="genre">Genre</label>
+          <select id="genre" name="genre">
+            <option value="Other">Other</option>
+            <option value="Fantasy">Fantasy</option>
+            <option value="Fiction">Fiction</option>
+            <option value="Mystery">Mystery</option>
+            <option value="Romance">Romance</option>
+            <option value="Science Fiction">Science Fiction</option>
+            <option value="Technology">Technology</option>
+            <option value="Self-help">Self-help</option>
+            <option value="Biography">Biography</option>
+            <option value="Science">Science</option>
+            <option value="History">History</option>
+          </select>
+
+          <label for="themes">Themes</label>
+          <input id="themes" name="themes" type="text"
+                 placeholder="e.g. friendship, courage, AI" maxlength="300">
+          <p class="field-hint">Separate themes with commas.</p>
+
+          <label for="coverUrl">Book cover image URL (optional)</label>
+          <input id="coverUrl" name="coverUrl" type="url"
+                 placeholder="https://example.com/cover.jpg">
+          <p class="field-hint">Use a direct image link. You can leave this blank.</p>
 
           <label for="status">Reading status</label>
           <select id="status" name="status">
@@ -71,50 +134,47 @@
             <option value="Finished">Finished</option>
           </select>
 
-          <button class="primary-btn" type="submit">+ Add to my library</button>
-          <p class="form-note">* Required fields</p>
+          <button class="primary-btn" type="submit">+ Add book</button>
+          <p id="formMessage" class="message" aria-live="polite"></p>
         </form>
       </section>
 
-      <section class="library">
+      <section class="panel library">
         <div class="library-heading">
           <div>
-            <p class="eyebrow">THE BOOKSHELF</p>
-            <h2>My library <span id="libraryCount" class="pill">0</span></h2>
+            <p class="eyebrow">YOUR COLLECTION</p>
+            <h2>My books</h2>
+            <p class="muted"><span id="libraryCount">0</span> books in your view</p>
           </div>
-          <button id="clearFilters" class="link-btn" type="button">Clear filters</button>
         </div>
 
         <div class="toolbar">
-          <div class="search-wrap">
-            <span aria-hidden="true">⌕</span>
-            <input id="search" type="search"
-                   placeholder="Search title or author..."
-                   aria-label="Search books by title or author">
-          </div>
-          <select id="filter" aria-label="Filter books by status">
-            <option value="All">All books</option>
+          <input id="search" type="search"
+                 placeholder="Search title or author..."
+                 aria-label="Search books">
+          <select id="filter" aria-label="Filter by status">
+            <option value="All">All statuses</option>
             <option value="To read">To read</option>
             <option value="Reading">Reading</option>
             <option value="Finished">Finished</option>
           </select>
         </div>
 
-        <p id="resultInfo" class="result-info" aria-live="polite"></p>
-        <div id="bookList" class="book-list" aria-live="polite"></div>
+        <div class="result-row">
+          <p id="resultInfo" class="muted">Your reading journey starts here.</p>
+          <button id="clearFilters" class="text-btn" type="button">Clear filters</button>
+        </div>
 
+        <div id="bookList" class="book-list"></div>
         <div id="emptyState" class="empty-state">
           <span class="empty-icon">📖</span>
-          <h3>Your shelf is waiting</h3>
-          <p>Add your first book to start building your reading journey.</p>
+          <h3>Your bookshelf is waiting</h3>
+          <p>Add your first book or try another search.</p>
         </div>
       </section>
-    </section>
+    </div>
 
-    <footer>
-      <span class="footer-mark">✦</span> PageTurn Book Tracker
-      <p>Your next chapter starts here.</p>
-    </footer>
+    <footer>Made for readers, one page at a time. ✨</footer>
   </main>
 </body>
 </html>
