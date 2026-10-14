@@ -26,13 +26,7 @@ Prompt used:
 
 Prompt used:
 
-"I want to make my book tracker a little more personal. Can you add an optional book cover image, a rating and personal notes for each book. Please handle missing or invalid cover images gracefully and make sure these features do not break the basic book tracking functions."
-
-5. Adding the Reading Constellation
-
-Prompt used:
-
-"I want to add a creative feature called Reading Constellation to my PageTurn book tracker. It should display books as points in a constellation and connect books that share the same genre or similar themes. Please use HTML, CSS and JavaScript with SVG for the visualisation. Make it fit the existing dashboard design and work on mobile screens. The constellation should update when books are added or removed and it should handle books that do not have a genre or theme. Please keep the implementation understandable and avoid using external frameworks."
+"I want to make my book tracker a little more personal. Can you add an optional book cover image, a rating and personal notes for each book. Please handle missing or invalid cover images gracefully and make sure these features do not break the basic book tracking functions and also I want to add a creative feature called Reading Constellation to my PageTurn book tracker. It should display books as points in a constellation and connect books that share the same genre or similar themes. Please use HTML, CSS and JavaScript with SVG for the visualisation. Make it fit the existing dashboard design and work on mobile screens. The constellation should update when books are added or removed and it should handle books that do not have a genre or theme. Please keep the implementation understandable and avoid using external frameworks."
 
 6. Reviewing the Code and Testing the Requirements
 
